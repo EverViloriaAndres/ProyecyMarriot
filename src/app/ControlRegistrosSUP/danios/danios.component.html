@@ -1,1 +1,187 @@
-<p>danios works!</p>
+<div class="activos">
+  <h3>Daños</h3>
+  <table (dblclick)="vaciarInputs()" id="tabla">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Lugar</th>
+        <th>Objeto</th>
+        <th>Causa</th>
+        <th>Estado</th>
+        <th>Informante</th>
+        <th>Fecha</th>
+        <th>Observaciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        (click)="
+          select(
+            Danio.id_danio,
+            Danio.lugarFK,
+            Danio.nomObjAfectado,
+            Danio.causa,
+            Danio.estado,
+            Danio.informante,
+            Danio.fechaSuceso,
+            Danio.observacion
+          )
+        "
+        *ngFor="let Danio of registrosMostrados()"
+      >
+        <td #id>{{ Danio.id_danio }}</td>
+        <td #inicio>{{ Danio.lugarFK }}</td>
+        <td #nov>{{ Danio.nomObjAfectado }}</td>
+        <td #lug>{{ Danio.causa }}</td>
+        <td #ac>{{ Danio.estado }}</td>
+        <td #fin>{{ Danio.informante }}</td>
+        <td #ob>{{ Danio.fechaSuceso }}</td>
+        <td #fe>{{ Danio.observacion }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!---->
+  <div class="arrow">
+    <h6 (click)="mostrarAnterior()">Anterior</h6>
+    <h6 (click)="mostrarSiguientes()">Siguiente</h6>
+  </div>
+  <!---->
+  <form action="">
+    <div class="inputs">
+      <!---->
+
+      <div>
+        <label for="id_cap">ID</label>
+        <input
+          disabled="true"
+          name="id_cap"
+          type="number"
+          id="id_cap"
+          [(ngModel)]="id_danio"
+        />
+      </div>
+      <!---->
+      <div>
+        <label for="lugarFK">Lugar</label>
+        <select name="lugarFK" id="lugarFK" [(ngModel)]="lugarFK">
+          <option value="vacio"></option>
+          <option [value]="lugar.id" *ngFor="let lugar of lugares">
+            {{ lugar.id }}:{{ lugar.tipoLugar }}{{ lugar.nombre }}
+          </option>
+        </select>
+      </div>
+      <!---->
+      <div>
+        <label for="obj">Objeto</label>
+        <input name="obj" type="text" id="obj" [(ngModel)]="nomObjAfectado" />
+      </div>
+      <!---->
+      <div>
+        <label for="causa">Causa</label>
+        <input name="causa" type="text" id="causa" [(ngModel)]="causa" />
+      </div>
+      <!---->
+      <div>
+        <label for="estado">Estado</label>
+        <select name="estado" id="estado" [(ngModel)]="estado">
+          <option value="">...</option>
+          <option value="Programada">Programada</option>
+          <option value="Arreglado">Arreglado</option>
+          <option value="Dañado">Dañado</option>
+        </select>
+      </div>
+      <!---->
+      <div>
+        <label for="informante">Informante</label>
+        <input
+          name="informante"
+          type="text"
+          id="informante"
+          [(ngModel)]="informante"
+        />
+      </div>
+      <!---->
+      <div>
+        <label for="fechaSuceso">Fecha</label>
+        <input
+          name="fechaSuceso"
+          type="date"
+          id="fechaSuceso"
+          [(ngModel)]="fechaSuceso"
+        />
+      </div>
+      <!---->
+      <!---->
+      <!---->
+      <!---->
+      <!---->
+      <div>
+        <label for="Observaciones">Observaciones</label>
+        <input
+          name="Observaciones"
+          type="text"
+          id="Observaciones"
+          [(ngModel)]="observacion"
+        />
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="Filtro">Filtro</label>
+        <input
+          name="Filtro"
+          type="text"
+          id="Filtro"
+          (keydown.enter)="funcionFiltrar()"
+          [(ngModel)]="criterioFiltrar"
+        />
+      </div>
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!---->
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!---->
+    </div>
+  </form>
+  <div class="submits">
+    <input
+      #Update
+      type="submit"
+      value="Editar"
+      name="Editar"
+      id="Editar"
+      (click)="update()"
+    />
+    <input
+      #Insert
+      type="submit"
+      value="Agregar"
+      name="Agregar"
+      id="Agregar"
+      (click)="insert()"
+    />
+    <input
+      #Delete
+      type="submit"
+      value="Eliminar"
+      name="Eliminar"
+      id="Eliminar"
+      (click)="delete()"
+    />
+  </div>
+
+  <p>{{ mensajeOk }}</p>
+</div>
