@@ -1,0 +1,190 @@
+<div class="activos">
+  <h3>Capacitaciones</h3>
+  <table (dblclick)="vaciarInputs()" id="tabla">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Tutor</th>
+        <th>Tema</th>
+        <th>Fecha</th>
+        <th># Horas</th>
+        <th>Modalidad</th>
+        <th>Lugar</th>
+        <th>Observaciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        (click)="
+          select(
+            capacitacion.id_capacitacion,
+            capacitacion.cc_persona_tutor_Fk,
+            capacitacion.tema_capacitacion,
+            capacitacion.fecha_capacitacion,
+            capacitacion.numero_horas,
+            capacitacion.modalidad,
+            capacitacion.lugarFK,
+            capacitacion.observacion
+          )
+        "
+        *ngFor="let capacitacion of registrosMostrados()"
+      >
+        <td #id>{{ capacitacion.id_capacitacion }}</td>
+        <td #nov>{{ capacitacion.cc_persona_tutor_Fk }}</td>
+        <td #lug>{{ capacitacion.tema_capacitacion }}</td>
+        <td #ac>{{ capacitacion.fecha_capacitacion }}</td>
+        <td #ob>{{ capacitacion.numero_horas }}</td>
+        <td #fe>{{ capacitacion.modalidad }}</td>
+        <td #inicio>{{ capacitacion.lugarFK }}</td>
+        <td #fin>{{ capacitacion.observacion }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!---->
+  <div class="arrow">
+    <h6 (click)="mostrarAnterior()">Anterior</h6>
+    <h6 (click)="mostrarSiguientes()">Siguiente</h6>
+  </div>
+  <!---->
+  <form action="">
+    <div class="inputs">
+      <!---->
+
+      <div>
+        <label for="id_cap">ID</label>
+        <input
+          disabled="true"
+          name="id_cap"
+          type="number"
+          id="id_cap"
+          [(ngModel)]="id_capacitacion"
+        />
+      </div>
+      <!---->
+      <div>
+        <label for="tutor">tutor</label>
+        <select name="tutor" id="tutor" [(ngModel)]="cc_persona_tutor_Fk">
+          <option value="vacio"></option>
+          <option [value]="gerente.cc" *ngFor="let gerente of gerentes">
+            {{ gerente.cc }}: {{ gerente.apellido }} {{ gerente.nombre }}
+          </option>
+        </select>
+      </div>
+      <!---->
+      <div>
+        <label for="Tema">Tema</label>
+        <input
+          name="Tema"
+          type="text"
+          id="Tema"
+          [(ngModel)]="tema_capacitacion"
+        />
+      </div>
+      <!---->
+      <div>
+        <label for="Fecha">Fecha</label>
+        <input
+          name="Fecha"
+          type="date"
+          id="Fecha"
+          [(ngModel)]="fecha_capacitacion"
+        />
+      </div>
+      <!---->
+      <div>
+        <label for="Horas">Horas</label>
+        <input
+          name="Horas"
+          type="number"
+          id="Horas"
+          [(ngModel)]="numero_horas"
+        />
+      </div>
+      <!---->
+      <div>
+        <label for="modo">Modalidad</label>
+        <input name="modo" type="text" id="modo" [(ngModel)]="modalidad" />
+      </div>
+      <!---->
+      <!---->
+      <div>
+        <label for="lugarFK">Lugar</label>
+        <select name="lugarFK" id="lugarFK" [(ngModel)]="lugarFK">
+          <option value="vacio"></option>
+          <option [value]="lugar.id" *ngFor="let lugar of lugares">
+            {{ lugar.id }}:{{ lugar.tipoLugar }}{{ lugar.nombre }}
+          </option>
+        </select>
+      </div>
+      <!---->
+      <!---->
+      <div>
+        <label for="Observaciones">Observaciones</label>
+        <input
+          name="Observaciones"
+          type="text"
+          id="Observaciones"
+          [(ngModel)]="observacion"
+        />
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="Filtro">Filtro</label>
+        <input
+          name="Filtro"
+          type="text"
+          id="Filtro"
+          (keydown.enter)="funcionFiltrar()"
+          [(ngModel)]="criterioFiltrar"
+        />
+      </div>
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!---->
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!---->
+    </div>
+  </form>
+  <div class="submits">
+    <input
+      #Update
+      type="submit"
+      value="Editar"
+      name="Editar"
+      id="Editar"
+      (click)="update()"
+    />
+    <input
+      #Insert
+      type="submit"
+      value="Agregar"
+      name="Agregar"
+      id="Agregar"
+      (click)="insert()"
+    />
+    <input
+      #Delete
+      type="submit"
+      value="Eliminar"
+      name="Eliminar"
+      id="Eliminar"
+      (click)="delete()"
+    />
+  </div>
+
+  <p>{{ mensajeOk }}</p>
+</div>

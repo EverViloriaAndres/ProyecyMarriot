@@ -1,0 +1,183 @@
+<div class="activos">
+  <h3>Arqueo</h3>
+  <table (dblclick)="vaciarInputs()" id="tabla">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Fecha</th>
+        <th>Lugar</th>
+        <th>Guardar</th>
+        <th>Motos</th>
+        <th>Carros</th>
+        <th>Bicicletas</th>
+        <th>Total</th>
+        <th>Observaciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        (click)="
+          select(
+            arqueo.id_registro,
+            arqueo.fecha_arqueo,
+            arqueo.lugarFK,
+            arqueo.guardaFK,
+            arqueo.num_M,
+            arqueo.num_C,
+            arqueo.num_B,
+            arqueo.total,
+            arqueo.observacion
+          )
+        "
+        *ngFor="let arqueo of registrosMostrados()"
+      >
+        <td #id>{{ arqueo.id_registro }}</td>
+        <td #nov>{{ arqueo.fecha_arqueo }}</td>
+        <td #lug>{{ arqueo.lugarFK }}</td>
+        <td #ac>{{ arqueo.guardaFK }}</td>
+        <td #ob>{{ arqueo.num_M }}</td>
+        <td #fe>{{ arqueo.num_C }}</td>
+        <td #inicio>{{ arqueo.num_B }}</td>
+        <td #fin>{{ arqueo.total }}</td>
+        <td #finalizada>{{ arqueo.observacion }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!---->
+  <div class="arrow">
+    <h6 (click)="mostrarAnterior()">Anterior</h6>
+    <h6 (click)="mostrarSiguientes()">Siguiente</h6>
+  </div>
+  <!---->
+  <form action="">
+    <div class="inputs">
+      <!---->
+
+      <div>
+        <label for="idArqueo">ID</label>
+        <input
+          disabled="true"
+          name="idArqueo"
+          type="number"
+          id="idArqueo"
+          [(ngModel)]="id_registro"
+        />
+      </div>
+
+      <!---->
+      <div>
+        <label for="Fecha">Fecha</label>
+        <input name="Fecha" type="date" id="Fecha" [(ngModel)]="fecha_arqueo" />
+      </div>
+      <!---->
+      <div>
+        <label for="lugarFK">Lugar</label>
+        <select name="lugarFK" id="lugarFK" [(ngModel)]="lugarFK">
+          <option value="vacio"></option>
+          <option [value]="lugar.id" *ngFor="let lugar of lugares">
+            {{ lugar.id }}:{{ lugar.tipoLugar }}{{ lugar.nombre }}
+          </option>
+        </select>
+      </div>
+      <!---->
+      <div>
+        <label for="Reporta">Reporta</label>
+        <select name="Reporta" id="Reporta" [(ngModel)]="guardaFK">
+          <option value="vacio"></option>
+          <option [value]="gerente.cc" *ngFor="let gerente of gerentes">
+            {{ gerente.cc }}: {{ gerente.apellido }} {{ gerente.nombre }}
+          </option>
+        </select>
+      </div>
+      <!---->
+
+      <div>
+        <label for="Motos">Motos</label>
+        <input name="Motos" type="text" id="Motos" [(ngModel)]="num_M" />
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="Carros">Carros</label>
+        <input name="Carros" type="text" id="Carros" [(ngModel)]="num_C" />
+      </div>
+
+      <!---->
+      <div>
+        <label for="Bicicletas">Bicicletas</label>
+        <input
+          name="Bicicletas"
+          type="text"
+          id="Bicicletas"
+          [(ngModel)]="num_B"
+        />
+      </div>
+
+      <!---->
+      <div>
+        <label for="Total">Total</label>
+        <input
+          disabled="true"
+          name="Total"
+          type="text"
+          id="Total"
+          [(ngModel)]="total"
+        />
+      </div>
+
+      <!---->
+      <div>
+        <label for="Observaciones">Observaciones</label>
+        <input
+          name="Observaciones"
+          type="text"
+          id="Observaciones"
+          [(ngModel)]="observacion"
+        />
+      </div>
+
+      <!---->
+      <div>
+        <label for="Filtro">Filtro</label>
+        <input
+          name="Filtro"
+          type="text"
+          id="Filtro"
+          (keydown.enter)="funcionFiltrar()"
+          [(ngModel)]="criterioFiltrar"
+        />
+      </div>
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!---->
+    </div>
+  </form>
+  <div class="submits">
+    <input
+      #Update
+      type="submit"
+      value="Editar"
+      name="Editar"
+      id="Editar"
+      (click)="update()"
+    />
+    <input
+      #Insert
+      type="submit"
+      value="Agregar"
+      name="Agregar"
+      id="Agregar"
+      (click)="insert()"
+    />
+  </div>
+
+  <p>{{ mensajeOk }}</p>
+</div>

@@ -30,12 +30,35 @@ import { VisitasEspecialesComponent } from './ControlRegistrosSUP/visitas-especi
 import { RequuerimientoCasualComponent } from './ControlRegistrosSUP/requuerimiento-casual/requuerimiento-casual.component';
 import { ServiceVisitaEspecialService } from './ControlRegistrosSUP/ServicesGenerales/service-visita-especial.service';
 import { ServiceRequerimientoCasualService } from './ControlRegistrosSUP/ServicesGenerales/service-requerimiento-casual.service';
+import { ReportArqueoComponent } from './ControlRegistrosSUP/report-arqueo/report-arqueo.component';
+import { CapacitacionesComponent } from './ControlRegistrosSUP/capacitaciones./capacitaciones..component';
+import { ServiceArqueoService } from './ControlRegistrosSUP/ServicesGenerales/service-arqueo.service';
+import { ServiceCapacitacionService } from './ControlRegistrosSUP/ServicesGenerales/service-capacitacion.service';
+
+import { DaniosComponent } from './ControlRegistrosSUP/danios/danios.component';
+
+import { EventoComponent } from './ControlRegistrosSUP/Eventos/evento/evento.component';
+import { CotizacionGuardaAdicionalEvtComponent } from './ControlRegistrosSUP/Eventos/cotizacion-guarda-adicional-evt/cotizacion-guarda-adicional-evt.component';
+import { CorrespondenciaComponent } from './ControlRegistrosSUP/Correspondenia/correspondencia/correspondencia.component';
+import { CorrespondenciaEntregadaComponent } from './ControlRegistrosSUP/Correspondenia/correspondencia-entregada/correspondencia-entregada.component';
+import { EventoServiceService } from './ControlRegistrosSUP/ServicesGenerales/evento-service.service';
+import { CotizacionGuardaEvtServiceService } from './ControlRegistrosSUP/ServicesGenerales/cotizacion-guarda-evt-service.service';
+import { TabajadorSexualComponent } from './ControlRegistrosSUP/Sexual/tabajador-sexual/tabajador-sexual.component';
+import { SexualEventComponent } from './ControlRegistrosSUP/Sexual/sexual-event/sexual-event.component';
+import { TrabajadorSexualANDSexualEventComponent } from './ControlRegistrosSUP/Sexual/trabajador-sexual-andsexual-event/trabajador-sexual-andsexual-event.component';
+import { CorrespondenciaEntregadaServiceService } from './ControlRegistrosSUP/ServicesGenerales/correspondencia-entregada-service.service';
+import { CorrespondenciaService } from './ControlRegistrosSUP/ServicesGenerales/correspondencia.service';
+import { TrabajadorSexualServiceService } from './ControlRegistrosSUP/ServicesGenerales/trabajador-sexual-service.service';
+import { SexualEventServiceService } from './ControlRegistrosSUP/ServicesGenerales/sexual-event-service.service';
+import { TestScheduler } from 'rxjs/testing';
+import { TsexualANDsexualEventserviceService } from './ControlRegistrosSUP/ServicesGenerales/tsexual-andsexual-eventservice.service';
 
 const Rutas: Routes = [
   { path: 'Activos', component: ActivosComponent },
   { path: 'movimientoIN', component: MovimientoInComponent },
   { path: 'movimientoOUT', component: MovimientoOUTComponent },
   { path: 'NovedadesDiarias', component: NovedadDiariaComponent },
+  { path: 'Danios', component: DaniosComponent },
   { path: 'Objetos', component: ObjComponent },
   { path: 'Victima', component: VictimaComponent },
   { path: 'Entregado', component: ObjEntregadosComponent },
@@ -46,6 +69,24 @@ const Rutas: Routes = [
   { path: 'VisitasEnfermeria', component: VisitasEnfermeriaComponent },
   { path: 'VisitaEspecial', component: VisitasEspecialesComponent },
   { path: 'ReqCasual', component: RequuerimientoCasualComponent },
+  { path: 'arqueo', component: ReportArqueoComponent },
+  { path: 'Capacitaciones', component: CapacitacionesComponent },
+
+  { path: 'TrabajadorSexual', component: TabajadorSexualComponent },
+  { path: 'ServicioSexual', component: SexualEventComponent },
+  {
+    path: 'TrabajadorANDServicioSexual',
+    component: TrabajadorSexualANDSexualEventComponent,
+  },
+
+  { path: 'Correspondencia', component: CorrespondenciaComponent },
+  { path: 'CorrespEntregada', component: CorrespondenciaEntregadaComponent },
+
+  { path: 'Evento', component: EventoComponent },
+  {
+    path: 'CotizacionGuarda',
+    component: CotizacionGuardaAdicionalEvtComponent,
+  },
 ];
 
 @NgModule({
@@ -65,6 +106,18 @@ const Rutas: Routes = [
     VisitasEnfermeriaComponent,
     VisitasEspecialesComponent,
     RequuerimientoCasualComponent,
+    ReportArqueoComponent,
+    CapacitacionesComponent,
+
+    DaniosComponent,
+
+    EventoComponent,
+    CotizacionGuardaAdicionalEvtComponent,
+    CorrespondenciaComponent,
+    CorrespondenciaEntregadaComponent,
+    TabajadorSexualComponent,
+    SexualEventComponent,
+    TrabajadorSexualANDSexualEventComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +137,15 @@ const Rutas: Routes = [
     ServiceHurtoService,
     ServiceVisitaEspecialService,
     ServiceRequerimientoCasualService,
+    ServiceArqueoService,
+    ServiceCapacitacionService,
+    EventoServiceService,
+    CotizacionGuardaEvtServiceService,
+    CorrespondenciaService,
+    CorrespondenciaEntregadaServiceService,
+    TrabajadorSexualServiceService,
+    SexualEventServiceService,
+    TsexualANDsexualEventserviceService,
   ],
   bootstrap: [AppComponent],
 })
