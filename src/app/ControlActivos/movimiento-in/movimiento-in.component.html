@@ -1,0 +1,150 @@
+<div class="activos">
+  <h3>Activos Devueltos</h3>
+  <table (click)="vaciarInputs()">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Guarda de Turno</th>
+        <th>Devuelto por</th>
+        <th>Cedula</th>
+        <th>Serial Activo</th>
+        <th>Observacion</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        (dblclick)="
+          selecionar(
+            registro.id_movimiento,
+            registro.guardaTurno,
+            registro.personaDevuelve,
+            registro.ccPersonaDevuelve,
+            registro.serialActivo,
+            registro.observacion,
+            registro.fechaIngreso
+          )
+        "
+        *ngFor="let registro of registrosMostrados()"
+      >
+        <td>{{ registro.id_movimiento }}</td>
+        <td>{{ registro.guardaTurno }}</td>
+        <td>{{ registro.personaDevuelve }}</td>
+        <td>{{ registro.ccPersonaDevuelve }}</td>
+        <td>{{ registro.serialActivo }}</td>
+        <td>{{ registro.observacion }}</td>
+        <td>{{ registro.fechaIngreso }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="arrow">
+    <h6 (click)="mostrarAnterior()">Anterios</h6>
+    <h6 (click)="mostrarSiguientes()">Siguiente</h6>
+  </div>
+  <form action="">
+    <div class="inputs">
+      <div class="id_movimiento">
+        <label for="id">ID</label>
+        <input
+          type="number"
+          name="id"
+          id="id"
+          [(ngModel)]="id_movimiento"
+          disabled="true"
+        />
+      </div>
+      <div class="guarda">
+        <label for="">Guarda</label>
+        <select
+          [(ngModel)]="guardaTurno"
+          name="listGuarda"
+          id="listGuarda"
+          title="guardas"
+        >
+          <option [value]="guarda.cc" *ngFor="let guarda of listaGuardas">
+            {{ guarda.cc }}: {{ guarda.nombre }} {{ guarda.apellido }}
+          </option>
+        </select>
+      </div>
+      <div class="devueltoPor">
+        <label for="devueltoPor">Devuelve</label>
+        <input
+          type="text"
+          name="devueltoPor"
+          id="devueltoPor"
+          placeholder="..."
+          [(ngModel)]="personaDevuelve"
+        />
+      </div>
+      <div class="ccDevuelve">
+        <label for="ccDevuelve">Cedula</label>
+        <input
+          type="text"
+          name="ccDevuelve"
+          id="ccDevuelve"
+          placeholder="..."
+          [(ngModel)]="ccPersonaDevuelve"
+        />
+      </div>
+      <div class="serialActivo">
+        <label for="">Activo</label>
+        <select
+          [(ngModel)]="serialActivo"
+          name="activosList"
+          id="ActivosList"
+          title="Activos"
+        >
+          <option
+            [value]="activo.num_serial"
+            *ngFor="let activo of listActivos"
+          >
+            {{ activo.num_serial }} : {{ activo.nombre }}
+          </option>
+        </select>
+      </div>
+      <div class="observacion">
+        <label for="observacion">observacion</label>
+        <input
+          type="text"
+          name="observacion"
+          id="observacion"
+          placeholder="..."
+          [(ngModel)]="observacion"
+        />
+      </div>
+    </div>
+    <div class="filtro">
+      <div class="filtrar">
+        <label for="filtrar">Filtrar</label>
+        <input
+          #filtroGet
+          type="text"
+          name=" filtrar"
+          id="filtrar"
+          (keydown.enter)="getByCriterio(filtroGet.value)"
+        />
+      </div>
+    </div>
+    <div class="submits">
+      <input
+        type="submit"
+        value="Editar"
+        name="Editar"
+        id="Editar"
+        (click)="update()"
+      />
+      <input
+        type="submit"
+        value="Agregar"
+        name="Agregar"
+        id="Agregar"
+        (click)="insert()"
+      />
+    </div>
+    <p id="mensaje">{{ mensajeOk }}</p>
+  </form>
+</div>
+<div class="DATAInportants">
+  <h6>Activo: {{ serialActivo }} &nbsp;</h6>
+  <h6>Guarda: {{ guardaTurno }}</h6>
+</div>

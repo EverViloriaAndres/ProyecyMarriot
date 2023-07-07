@@ -1,0 +1,190 @@
+<div class="activos">
+  <h3>Salida de Activos</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Autoriza</th>
+        <th>Guarda de Turno</th>
+        <th>Motivo</th>
+        <th>Retira</th>
+        <th>Cedula</th>
+        <th>Area</th>
+        <th># Activo</th>
+        <th>Observacion</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody (dblclick)="vaciarInputs()">
+      <tr
+        #selecion
+        (click)="
+          selecionar(
+            registros.id_movimiento,
+            registros.autorizadoPOR,
+            registros.guardaTurno,
+            registros.motivo,
+            registros.personaRetira,
+            registros.ccPersonaRetita,
+            registros.areaPersonaRetira,
+            registros.serialActivo,
+            registros.observacion
+          )
+        "
+        *ngFor="let registros of registrosMostrados()"
+        id="trSeleccion"
+      >
+        <td #id>{{ registros.id_movimiento }}</td>
+        <td #autoriza>{{ registros.autorizadoPOR }}</td>
+        <td #guarda>{{ registros.guardaTurno }}</td>
+        <td #motivo>{{ registros.motivo }}</td>
+        <td #retira>{{ registros.personaRetira }}</td>
+        <td #cc>{{ registros.ccPersonaRetita }}</td>
+        <td #area>{{ registros.areaPersonaRetira }}</td>
+        <td #serial>{{ registros.serialActivo }}</td>
+        <td #obs>{{ registros.observacion }}</td>
+        <td #fecha>{{ registros.fechaRetiro }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="arrow">
+    <h6 (click)="mostrarAnterior()">Anterios</h6>
+    <h6 (click)="mostrarSiguientes()">Siguiente</h6>
+  </div>
+  <form action="">
+    <h6 [ngClass]="color">{{ mensajeOk }}</h6>
+    <div class="inputs">
+      <div>
+        <label for="id">ID</label>
+        <input
+          type="number"
+          name="id"
+          id="id"
+          placeholder="..."
+          [(ngModel)]="id_movimiento"
+          disabled="true"
+        />
+      </div>
+      <div>
+        <label for="Autorizadopor">Autorizado Por</label>
+        <select
+          name="Autorizadopor"
+          title="Autorizadopor"
+          [(ngModel)]="autorizadoPOR"
+        >
+          <option
+            [value]="autorizador.cc"
+            *ngFor="let autorizador of listAutorizadores"
+          >
+            {{ autorizador.cc }} : {{ autorizador.apellido }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label for="guarda">Guarda</label>
+        <select name="guarda" title="guarda" [(ngModel)]="guardaTurno">
+          <option [value]="guarda.cc" *ngFor="let guarda of listaGuardas">
+            {{ guarda.cc }} : {{ guarda.apellido }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label for="motivo">Motivo</label>
+        <input
+          type="text"
+          name="motivo"
+          id="motivo"
+          placeholder="..."
+          [(ngModel)]="motivo"
+        />
+      </div>
+      <div>
+        <label for="retiradoPor">Retira</label>
+        <input
+          type="text"
+          name="retiradoPor"
+          id="retiradoPor"
+          placeholder="..."
+          [(ngModel)]="personaRetira"
+        />
+      </div>
+      <div>
+        <label for="ccRetira">Cedula</label>
+        <input
+          type="number"
+          name="ccRetira"
+          id="ccRetira"
+          placeholder="..."
+          [(ngModel)]="ccPersonaRetita"
+        />
+      </div>
+      <div>
+        <label for="area">Area</label>
+        <input
+          type="text"
+          name="area"
+          id="area"
+          placeholder="..."
+          [(ngModel)]="areaPersonaRetira"
+        />
+      </div>
+      <div>
+        <label for="serial">Activo</label>
+        <select name="serial" title="serial" [(ngModel)]="serialActivo">
+          <option
+            [value]="serial.num_serial"
+            *ngFor="let serial of listActivos"
+          >
+            {{ serial.num_serial }} : {{ serial.nombre }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label for="observacion">observacion</label>
+        <input
+          type="text"
+          name="observacion"
+          id="observacion"
+          placeholder="..."
+          [(ngModel)]="observacion"
+        />
+      </div>
+    </div>
+    <div class="filtro">
+      <label for="filtro">Filtrar</label>
+      <input
+        type="text"
+        name="filtro"
+        id="filtro"
+        placeholder="...Buscar"
+        #valueFiltro
+        (keydown.enter)="getByCriterio(valueFiltro.value)"
+      />
+    </div>
+    <div class="submits">
+      <input
+        type="submit"
+        value="Editar"
+        name="update"
+        id="update"
+        (click)="update()"
+      />
+      <input
+        type="submit"
+        value="Agregar"
+        name="post"
+        id="post"
+        (click)="insert()"
+      />
+    </div>
+  </form>
+</div>
+
+<!--Por solicitud del cleinte, necesitan saber y estar seguros de los datos que estan pasando a la consulta-->
+<div class="dateImportatnt">
+  Autoriza: {{ autorizadoPOR }}
+  <br />
+  Guarda: {{ guardaTurno }}
+  <br />
+  Serial Activo {{ serialActivo }}
+</div>

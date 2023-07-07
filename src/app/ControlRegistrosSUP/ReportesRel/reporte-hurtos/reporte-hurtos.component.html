@@ -1,0 +1,149 @@
+<div class="activos">
+  <h3>Obj Reportados como Hurtados</h3>
+  <table (dblclick)="vaciarInputs()" id="tabla">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Obj</th>
+        <th>Lugar</th>
+        <th>Victima</th>
+        <th>Modalidad</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        (click)="
+          select(
+            reporte.idReporte,
+            reporte.objExtraviadoFK,
+            reporte.lugarFK,
+            reporte.victimaFK,
+            reporte.modalidadRobo,
+            reporte.fechaSuceso
+          )
+        "
+        *ngFor="let reporte of registrosMostrados()"
+      >
+        <td #id>{{ reporte.idReporte }}</td>
+        <td #nov>{{ reporte.objExtraviadoFK }}</td>
+        <td #lug>{{ reporte.lugarFK }}</td>
+        <td #ac>{{ reporte.victimaFK }}</td>
+        <td #ob>{{ reporte.modalidadRobo }}</td>
+        <td #fe>{{ reporte.fechaSuceso }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!---->
+  <div class="arrow">
+    <h6 (click)="mostrarAnterior()">Anterior</h6>
+    <h6 (click)="mostrarSiguientes()">Siguiente</h6>
+  </div>
+  <!---->
+  <form action="">
+    <div class="inputs">
+      <!---->
+      <div class="id">
+        <label for="id">ID</label>
+        <input
+          disabled="true"
+          #Serial
+          type="number"
+          name="id"
+          placeholder="id"
+          [(ngModel)]="idReporte"
+        />
+      </div>
+      <!---->
+      <div class="obj">
+        <label for="obj">Objeto</label>
+        <select [(ngModel)]="objExtraviadoFK" name="obj" title="obj">
+          <option *ngFor="let obj of listaObj" [value]="obj.id" name="obj">
+            {{ obj.id }}
+            {{ obj.nombre }}
+          </option>
+        </select>
+      </div>
+      <!---->
+      <div class="Lugar">
+        <label for="Lugar">Lugar</label>
+        <select [(ngModel)]="lugarFK" name="Lugar" id="Lugar" title="Lugar">
+          <option
+            *ngFor="let lugar of listaLugares"
+            [value]="lugar.id"
+            name="Lugar"
+          >
+            {{ lugar.id }}
+            {{ lugar.tipoLugar }}
+            {{ lugar.nombre }}
+          </option>
+        </select>
+      </div>
+      <!---->
+      <div class="Victima">
+        <label for="Victima">Victima</label>
+        <select [(ngModel)]="victimaFK" name="Victima" title="Victima">
+          <option
+            *ngFor="let victima of listaLVictimas"
+            [value]="victima.cc"
+            name="Victima"
+          >
+            {{ victima.cc }}
+            {{ victima.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <div class="modalidadRobo">
+        <label for="modalidadRobo">Modalidad</label>
+        <input
+          [(ngModel)]="modalidadRobo"
+          type="text"
+          name="modalidadRobo"
+          id="modalidadRobo"
+          placeholder="Modalidad Robo"
+        />
+      </div>
+
+      <div class="Fecha">
+        <label for="Fecha">Fecha</label>
+        <input
+          #filtroGet
+          type="date"
+          name="Fecha"
+          id="Fecha"
+          [(ngModel)]="fechaSuceso"
+        />
+      </div>
+
+      <input
+        (keydown.enter)="funcionFiltrar()"
+        [(ngModel)]="criterioFiltrar"
+        #filtro
+        type="text"
+        name="filtro"
+        id="filtro"
+        placeholder="FLTRAR"
+      />
+    </div>
+  </form>
+  <div class="submits">
+    <input
+      #Update
+      type="submit"
+      value="Editar"
+      name="Editar"
+      id="Editar"
+      (click)="update()"
+    />
+    <input
+      #Insert
+      type="submit"
+      value="Agregar"
+      name="Agregar"
+      id="Agregar"
+      (click)="insert()"
+    />
+  </div>
+  <p>{{ mensajeOk }}</p>
+</div>

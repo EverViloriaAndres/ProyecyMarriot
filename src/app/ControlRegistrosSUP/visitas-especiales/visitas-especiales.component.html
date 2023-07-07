@@ -1,0 +1,202 @@
+<div class="activos">
+  <h3>Visitas Especiales</h3>
+  <table (dblclick)="vaciarInputs()">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Visitante</th>
+        <th>Ocupacion</th>
+        <th>Nacionalidad</th>
+        <th>Motivo</th>
+        <th>Lugar</th>
+        <th>Ingreso</th>
+        <th>Salida</th>
+        <th>Observaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        (click)="
+          select(
+            registros.id_Visita,
+            registros.nombreVisitante,
+            registros.ocupacionVisitante,
+            registros.nacionalidad,
+            registros.motivoVisita,
+            registros.lugarFK,
+            registros.fechaIn,
+            registros.fechaOut,
+            registros.Observacion
+          )
+        "
+        *ngFor="let registros of registrosMostrados()"
+      >
+        <td #id>{{ registros.id_Visita }}</td>
+        <td #nov>{{ registros.nombreVisitante }}</td>
+        <td #lug>{{ registros.ocupacionVisitante }}</td>
+        <td #ac>{{ registros.nacionalidad }}</td>
+        <td #ob>{{ registros.motivoVisita }}</td>
+        <td #fe>{{ registros.lugarFK }}</td>
+        <td #ac>{{ registros.fechaIn }}</td>
+        <td #fecha>{{ registros.fechaOut }}</td>
+        <td #ob>{{ registros.Observacion }}</td>
+      </tr>
+    </tbody>
+    <div class="arrow">
+      <h6 (click)="mostrarAnterior()">Anterior</h6>
+      <h6 (click)="mostrarSiguientes()">Siguiente</h6>
+    </div>
+  </table>
+
+  <form action="">
+    <div class="inputs">
+      <!---->
+      <div class="id">
+        <label for="id">ID</label>
+        <input
+          disabled="true"
+          #Serial
+          type="number"
+          name="id"
+          id="id"
+          placeholder="id"
+          [(ngModel)]="id_Visita"
+        />
+      </div>
+      <!---->
+      <div class="nombre">
+        <label for="nombre">Nombre</label>
+        <input
+          type="text"
+          name="nombre"
+          id="nombre"
+          placeholder="nombre"
+          [(ngModel)]="nombreVisitante"
+        />
+      </div>
+      <!---->
+
+      <!---->
+      <div class="apellido">
+        <label for="apellido">Ocupacion</label>
+        <input
+          [(ngModel)]="ocupacionVisitante"
+          type="text"
+          name="apellido"
+          id="apellido"
+          placeholder="apellido"
+        />
+      </div>
+      <!---->
+      <div class="area">
+        <label for="area">Nacionalidad</label>
+        <input
+          [(ngModel)]="nacionalidad"
+          type="text"
+          name="area"
+          id="area"
+          placeholder="area"
+        />
+      </div>
+      <!---->
+      <div class="motivo">
+        <label for="motivo">Motivo</label>
+        <input
+          [(ngModel)]="motivoVisita"
+          type="text"
+          name="motivo"
+          id="motivo"
+        />
+      </div>
+      <!---->
+      <div class="Lugar">
+        <label for="Lugar">Lugar</label>
+        <select [(ngModel)]="lugarFK" name="Lugar" id="Lugar" title="Lugar">
+          <option
+            *ngFor="let lugar of listaLugares"
+            [value]="lugar.id"
+            name="Lugar"
+          >
+            {{ lugar.id }}
+            {{ lugar.tipoLugar }}
+            {{ lugar.nombre }}
+          </option>
+        </select>
+      </div>
+      <!---->
+      <div class="accionar">
+        <label for="accionar">Ingreso</label>
+        <input
+          [(ngModel)]="fechaIn"
+          type="date"
+          name="accionar"
+          id="accionar"
+        />
+      </div>
+      <!---->
+      <div class="fecha">
+        <label for="fecha">Salida</label>
+        <input
+          #fecha
+          name="fecha"
+          type="date"
+          id="fecha"
+          [(ngModel)]="fechaOut"
+        />
+      </div>
+      <!---->
+
+      <div class="observaciones">
+        <label for="observaciones">Observaciones</label>
+        <input
+          [(ngModel)]="Observacion"
+          type="text"
+          name="observaciones"
+          id="observaciones"
+        />
+      </div>
+      <!---->
+      <input
+        [(ngModel)]="criterioFiltrar"
+        #filtro
+        type="text"
+        name="filtro"
+        id="filtro"
+        placeholder="FLTRAR"
+        (keydown.enter)="filtrar()"
+      />
+    </div>
+  </form>
+  <div class="submits">
+    <!---->
+    <input
+      #Update
+      type="submit"
+      value="Editar"
+      name="Editar"
+      id="Editar"
+      (click)="update()"
+    />
+    <!---->
+    <input
+      #Insert
+      type="submit"
+      value="Agregar"
+      name="Agregar"
+      id="Agregar"
+      (click)="insert()"
+    />
+    <!---->
+    <input
+      #Delete
+      type="submit"
+      value="Eliminar"
+      name="Eliminar"
+      id="Eliminar"
+      (click)="delete()"
+    />
+    <!---->
+  </div>
+  <!---->
+  <p>{{ mensajeOk }}</p>
+</div>

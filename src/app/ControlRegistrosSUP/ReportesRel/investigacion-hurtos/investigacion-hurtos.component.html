@@ -1,0 +1,106 @@
+<div class="activos">
+  <h3>Investigaciones_Hurtos</h3>
+  <table (dblclick)="vaciarInputs()" id="tabla">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Reporte Hurto</th>
+        <th>Investigacion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        (click)="
+          select(
+            investigacion_Hurto.id,
+            investigacion_Hurto.reporteHurto_FK,
+            investigacion_Hurto.investigacion_FK
+          )
+        "
+        *ngFor="let investigacion_Hurto of registrosMostrados()"
+      >
+        <td #id>{{ investigacion_Hurto.id }}</td>
+        <td #nov>{{ investigacion_Hurto.reporteHurto_FK }}</td>
+        <td #lug>{{ investigacion_Hurto.investigacion_FK }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!---->
+  <div class="arrow">
+    <h6 (click)="mostrarAnterior()">Anterior</h6>
+    <h6 (click)="mostrarSiguientes()">Siguiente</h6>
+  </div>
+  <!---->
+  <form action="">
+    <div class="inputs">
+      <!---->
+
+      <div>
+        <label for="idInvestigacion">ID Investigación/Hurto</label>
+        <input
+          disabled="true"
+          name="idInvestigacion"
+          type="number"
+          id="idInvestigacion"
+          [(ngModel)]="idReporte"
+        />
+      </div>
+    </div>
+    <div class="largo">
+      <div>
+        <label for="reporteHurto_FK">Reporte Hurto</label>
+        <select
+          [(ngModel)]="reporteHurto_FK"
+          name="reporteHurto_FK"
+          id="reporteHurto_FK"
+        >
+          <option value="vacio"></option>
+          <option [value]="Hurto.idReporte" *ngFor="let Hurto of hurtos">
+            Objeto: {{ Hurto.obj }} {{ Hurto.marca }}, Victima:
+            {{ Hurto.victima }}, Modalidad: {{ Hurto.modalidadRobo }}, Fecha:
+            {{ Hurto.fechaSuceso }}
+          </option>
+        </select>
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="investigacion_FK">Investigacion</label>
+        <select
+          [(ngModel)]="investigacion_FK"
+          name="investigacion_FK"
+          id="investigacion_FK"
+        >
+          <option value="vacio"></option>
+          <option
+            [value]="investigacion.id"
+            *ngFor="let investigacion of investigaciones"
+          >
+            Info:
+            {{ investigacion.observaciones_resultado }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </form>
+  <div class="submits">
+    <input
+      #Update
+      type="submit"
+      value="Editar"
+      name="Editar"
+      id="Editar"
+      (click)="update()"
+    />
+    <input
+      #Insert
+      type="submit"
+      value="Agregar"
+      name="Agregar"
+      id="Agregar"
+      (click)="insert()"
+    />
+  </div>
+  {{ mensajeOk }}
+</div>

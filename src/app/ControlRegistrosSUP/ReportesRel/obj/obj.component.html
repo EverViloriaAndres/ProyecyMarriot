@@ -1,0 +1,131 @@
+<div class="activos">
+  <h3>Lista De Objetos</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Marca</th>
+        <th>Contenido</th>
+        <th>Valor</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let obj of registrosMostrados()">
+        <td #id>{{ obj.id }}</td>
+        <td #nom>{{ obj.nombre }}</td>
+        <td #mark>{{ obj.marca }}</td>
+        <td #cont>{{ obj.contenido }}</td>
+        <td #val>{{ obj.valor }}</td>
+        <td
+          (dblclick)="
+            select(obj.id, obj.nombre, obj.marca, obj.contenido, obj.valor)
+          "
+          class="select"
+          (click)="vaciarInputs()"
+        >
+          Select
+        </td>
+      </tr>
+    </tbody>
+    <div class="arrow">
+      <h5 (click)="mostrarAnterior()">Anterior</h5>
+      <h5 (click)="mostrarSiguientes()">Siguiente</h5>
+    </div>
+  </table>
+  <form action="">
+    <div class="inputs">
+      <div class="id">
+        <label for="id">ID</label>
+        <input
+          [(ngModel)]="idOBJ"
+          type="number"
+          name="id"
+          placeholder="ID"
+          [disabled]="disabled"
+        />
+      </div>
+      <div class="nombre">
+        <label for="nombre">Nombre</label>
+        <input
+          [(ngModel)]="nombre"
+          type="text"
+          name="nombre"
+          id="nombre"
+          placeholder="nombre"
+        />
+      </div>
+      <div class="marca">
+        <label for="marca">Marca</label>
+        <input
+          [(ngModel)]="marca"
+          type="text"
+          name="marca"
+          id="marca"
+          placeholder="Marca"
+        />
+      </div>
+
+      <div class="contenido">
+        <label for="contenido">Contenido</label>
+        <input
+          [(ngModel)]="contenido"
+          type="text"
+          name="contenido"
+          id="contenido"
+          placeholder="contenido"
+        />
+      </div>
+
+      <div class="valor">
+        <label for="valor">Valor</label>
+        <input
+          [(ngModel)]="valor"
+          type="number"
+          name="valor"
+          id="valor"
+          placeholder="Valor"
+        />
+      </div>
+
+      <label for="filtro"></label>
+      <input
+        #filtro
+        type="text"
+        name="filtro"
+        id="filtro #filtro"
+        placeholder="Filtrar"
+        (keydown.enter)="getByFiltro(filtro.value)"
+      />
+    </div>
+  </form>
+  <div class="submits">
+    <input
+      #Update
+      type="submit"
+      value="Editar"
+      name="Editar"
+      id="Editar"
+      (click)="updateOBJ()"
+    />
+    <input
+      #Insert
+      type="submit"
+      value="Agregar"
+      name="Agregar"
+      id="Agregar"
+      (click)="insertOBJ()"
+      (dblclick)="preparaGuardar()"
+    />
+    <input
+      #Delete
+      type="submit"
+      value="Eliminar"
+      name="Eliminar"
+      id="Eliminar"
+      (click)="deleteOBJ()"
+    />
+  </div>
+  <p>{{ mensajeOk }}</p>
+</div>

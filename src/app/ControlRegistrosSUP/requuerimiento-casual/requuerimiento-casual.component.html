@@ -1,0 +1,190 @@
+<div class="activos">
+  <h3>Request Casual</h3>
+  <table (dblclick)="vaciarInputs()">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Requerimiento</th>
+        <th>Lugar</th>
+        <th>Informante</th>
+        <th>Area</th>
+        <th>Accion</th>
+        <th>Observaciones</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        (click)="
+          select(
+            request.id_requerimiento,
+            request.requerimiento,
+            request.lugarFK,
+            request.quien_informa,
+            request.area_requerimiento,
+            request.accion,
+            request.observacion,
+            request.fecha_requerimiento
+          )
+        "
+        *ngFor="let request of registrosMostrados()"
+      >
+        <td #id>{{ request.id_requerimiento }}</td>
+        <td #nov>{{ request.requerimiento }}</td>
+        <td #fe>{{ request.lugarFK }}</td>
+        <td #lug>{{ request.quien_informa }}</td>
+        <td #ac>{{ request.area_requerimiento }}</td>
+        <td #ob>{{ request.accion }}</td>
+        <td #ob>{{ request.observacion }}</td>
+        <td #ac>{{ request.fecha_requerimiento }}</td>
+      </tr>
+    </tbody>
+    <div class="arrow">
+      <h6 (click)="mostrarAnterior()">Anterior</h6>
+      <h6 (click)="mostrarSiguientes()">Siguiente</h6>
+    </div>
+  </table>
+
+  <form action="">
+    <div class="inputs">
+      <!---->
+      <div class="id">
+        <label for="id">ID</label>
+        <input
+          disabled="true"
+          #Serial
+          type="number"
+          name="id"
+          id="id"
+          placeholder="id"
+          [(ngModel)]="id_requerimiento"
+        />
+      </div>
+      <!---->
+      <div class="Requerimiento">
+        <label for="nombre">Requerimiento</label>
+        <input
+          type="text"
+          name="Requerimiento"
+          id="Requerimiento"
+          placeholder="Requerimiento"
+          [(ngModel)]="requerimiento"
+        />
+      </div>
+      <!---->
+      <div class="Lugar">
+        <label for="Lugar">Lugar</label>
+        <select [(ngModel)]="lugarFK" name="Lugar" id="Lugar" title="Lugar">
+          <option
+            *ngFor="let lugar of listaLugares"
+            [value]="lugar.id"
+            name="Lugar"
+          >
+            {{ lugar.id }}
+            {{ lugar.tipoLugar }}
+            {{ lugar.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <!---->
+      <div class="Informante">
+        <label for="Informante">Informante</label>
+        <input
+          [(ngModel)]="quien_informa"
+          type="text"
+          name="Informante"
+          id="Informante"
+          placeholder="Informante"
+        />
+      </div>
+      <!---->
+      <div class="area">
+        <label for="area">Area</label>
+        <input
+          [(ngModel)]="area_requerimiento"
+          type="text"
+          name="area"
+          id="area"
+          placeholder="area"
+        />
+      </div>
+      <!---->
+      <div class="Accion">
+        <label for="Accion">Accion</label>
+        <input
+          [(ngModel)]="accion"
+          type="text"
+          name="motAccionivo"
+          id="Accion"
+        />
+      </div>
+      <!---->
+      <div class="observaciones">
+        <label for="observaciones">Observaciones</label>
+        <input
+          [(ngModel)]="observacion"
+          type="text"
+          name="observaciones"
+          id="observaciones"
+        />
+      </div>
+      <!---->
+      <div class="Fecha">
+        <label for="Fecha">Fecha</label>
+        <input
+          [(ngModel)]="fecha_requerimiento"
+          type="date"
+          name="Fecha"
+          id="Fecha"
+        />
+      </div>
+      <!---->
+
+      <!---->
+
+      <!---->
+      <input
+        [(ngModel)]="criterioFiltrar"
+        #filtro
+        type="text"
+        name="filtro"
+        id="filtro"
+        placeholder="FLTRAR"
+        (keydown.enter)="filtrar()"
+      />
+    </div>
+  </form>
+  <div class="submits">
+    <!---->
+    <input
+      #Update
+      type="submit"
+      value="Editar"
+      name="Editar"
+      id="Editar"
+      (click)="update()"
+    />
+    <!---->
+    <input
+      #Insert
+      type="submit"
+      value="Agregar"
+      name="Agregar"
+      id="Agregar"
+      (click)="insert()"
+    />
+    <!---->
+    <input
+      #Delete
+      type="submit"
+      value="Eliminar"
+      name="Eliminar"
+      id="Eliminar"
+      (click)="delete()"
+    />
+    <!---->
+  </div>
+  <!---->
+  <p>{{ mensajeOk }}</p>
+</div>

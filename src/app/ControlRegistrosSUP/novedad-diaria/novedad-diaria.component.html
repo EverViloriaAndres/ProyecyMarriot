@@ -1,0 +1,149 @@
+<div class="activos">
+  <h3>Novedades Diarias</h3>
+  <table (dblclick)="vaciarInputs()">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Novedad</th>
+        <th>Lugar</th>
+        <th>Accionar</th>
+        <th>Observaciones</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        (click)="
+          select(
+            registros.id,
+            registros.novedad,
+            registros.lugarFK,
+            registros.accionar,
+            registros.observaciones,
+            registros.fechaSuceso
+          )
+        "
+        *ngFor="let registros of registrosMostrados()"
+      >
+        <td #id>{{ registros.id }}</td>
+        <td #nov>{{ registros.novedad }}</td>
+        <td #lug>{{ registros.lugarFK }}</td>
+        <td #ac>{{ registros.accionar }}</td>
+        <td #ob>{{ registros.observaciones }}</td>
+        <td #fe>{{ registros.fechaSuceso }}</td>
+      </tr>
+    </tbody>
+    <div class="arrow">
+      <h6 (click)="mostrarAnterior()">Anterior</h6>
+      <h6 (click)="mostrarSiguientes()">Siguiente</h6>
+    </div>
+  </table>
+
+  <form action="">
+    <div class="inputs">
+      <div class="id">
+        <label for="id">ID</label>
+        <input
+          disabled="true"
+          #Serial
+          type="number"
+          name="id"
+          id="id"
+          placeholder="id"
+          [(ngModel)]="id"
+        />
+      </div>
+      <div class="novedad">
+        <label for="novedad">novedad</label>
+        <input
+          type="text"
+          name="novedad"
+          id="novedad"
+          placeholder="novedad"
+          [(ngModel)]="novedad"
+        />
+      </div>
+      <div class="Lugar">
+        <label for="Lugar">Lugar</label>
+        <select [(ngModel)]="lugar" name="Lugar" id="Lugar" title="Lugar">
+          <option
+            *ngFor="let lugar of listaLugares"
+            [value]="lugar.id"
+            name="Lugar"
+          >
+            {{ lugar.id }}
+            {{ lugar.tipoLugar }}
+            {{ lugar.nombre }}
+          </option>
+        </select>
+      </div>
+      <div class="Accionar">
+        <label for="Accionar">Accionar</label>
+        <input
+          [(ngModel)]="accionar"
+          type="text"
+          name="Accionar"
+          id="Accionar"
+          placeholder="Accionar"
+        />
+      </div>
+      <div class="Observaciones">
+        <label for="Observaciones">Observaciones</label>
+        <input
+          [(ngModel)]="observaciones"
+          type="text"
+          name="Observaciones"
+          id="Observaciones"
+          placeholder="Observaciones"
+        />
+      </div>
+      <div class="Fecha">
+        <label for="Fecha">Fecha</label>
+        <input
+          [(ngModel)]="fechaSuceso"
+          type="text"
+          name="Fecha"
+          id="Fecha"
+          placeholder="2023-04-06 11:36:44"
+        />
+      </div>
+
+      <input
+        (keydown.enter)="funcionFiltrar()"
+        [(ngModel)]="criterioFiltrar"
+        #filtro
+        type="text"
+        name="filtro"
+        id="filtro"
+        placeholder="FLTRAR"
+      />
+    </div>
+  </form>
+  <div class="submits">
+    <input
+      #Update
+      type="submit"
+      value="Editar"
+      name="Editar"
+      id="Editar"
+      (click)="update()"
+    />
+    <input
+      #Insert
+      type="submit"
+      value="Agregar"
+      name="Agregar"
+      id="Agregar"
+      (click)="insert()"
+    />
+    <input
+      #Delete
+      type="submit"
+      value="Eliminar"
+      name="Eliminar"
+      id="Eliminar"
+      (click)="delete()"
+    />
+  </div>
+  <p>{{ mensajeOk }}</p>
+</div>

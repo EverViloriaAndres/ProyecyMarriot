@@ -1,0 +1,136 @@
+<div class="activos">
+  <h3>Lista De Activos</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Num_Serial</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Valor</th>
+        <th>¿En posecion?</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let registros of registrosMostrados()">
+        <td #num>{{ registros.num_serial }}</td>
+        <td #nom>{{ registros.nombre }}</td>
+        <td #des>{{ registros.describcion }}</td>
+        <td #val>{{ registros.valor }}</td>
+        <td #siNO>{{ registros.enPosecion }}</td>
+        <td
+          (dblclick)="
+            select(
+              registros.num_serial,
+              registros.nombre,
+              registros.describcion,
+              registros.valor,
+              registros.enPosecion
+            )
+          "
+          class="select"
+          (click)="vaciarInputs()"
+        >
+          Select
+        </td>
+      </tr>
+    </tbody>
+    <div class="arrow">
+      <h5 (click)="mostrarAnterior()">Anterior</h5>
+      <h5 (click)="mostrarSiguientes()">Siguiente</h5>
+    </div>
+  </table>
+  <form action="">
+    <div class="inputs">
+      <div class="numSerial">
+        <label for="serial">Serial</label>
+        <input
+          #Serial
+          [(ngModel)]="num_serial"
+          type="number"
+          name="serial"
+          id="serial"
+          placeholder="Serial"
+          [disabled]="disabled"
+        />
+      </div>
+      <div class="nombreActivo">
+        <label for="nombre">Nombre</label>
+        <input
+          [(ngModel)]="nombre"
+          type="text"
+          name="nombre"
+          id="nombre"
+          placeholder="nombre"
+        />
+      </div>
+      <div class="descripActivo">
+        <label for="describcion">Describcion</label>
+        <input
+          [(ngModel)]="describcion"
+          type="text"
+          name="describcion"
+          id="describcion"
+          placeholder="describcion"
+        />
+      </div>
+      <div class="valorActivo">
+        <label for="valor">Valor</label>
+        <input
+          [(ngModel)]="valor"
+          type="number"
+          name="valor"
+          id="valor"
+          placeholder="valor"
+        />
+      </div>
+      <div class="enPosesion">
+        <label for="enPosesion">¿En posecion?</label>
+        <input
+          [(ngModel)]="enPosecion"
+          type="text"
+          name="enPosesion"
+          id="enPosesion"
+          placeholder="¿Lo tenemos?"
+        />
+      </div>
+      <label for="filtro"></label>
+      <input
+        #filtro
+        type="text"
+        name="filtro"
+        id="filtro #filtro"
+        placeholder="Filtrar"
+        (keydown.enter)="getByFiltro(filtro.value)"
+      />
+    </div>
+  </form>
+  <div class="submits">
+    <input
+      #Update
+      type="submit"
+      value="Editar"
+      name="Editar"
+      id="Editar"
+      (click)="updateActivo()"
+    />
+    <input
+      #Insert
+      type="submit"
+      value="Agregar"
+      name="Agregar"
+      id="Agregar"
+      (click)="insertNuevoActivo()"
+      (dblclick)="preparaGuardar()"
+    />
+    <input
+      #Delete
+      type="submit"
+      value="Eliminar"
+      name="Eliminar"
+      id="Eliminar"
+      (click)="deleteActivo(Serial.valueAsNumber)"
+    />
+  </div>
+  <p>{{ mensajeOk }}</p>
+</div>

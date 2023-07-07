@@ -1,0 +1,108 @@
+.activos {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+
+  outline: solid white 1px;
+}
+h3 {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 3px;
+}
+.activos table {
+  text-align: center;
+  width: inherit;
+  position: relative;
+
+  border-collapse: collapse;
+}
+.activos table th {
+  background-color: black;
+  color: white;
+  padding: 5px;
+}
+.activos table tbody {
+  background-color: #9ba4b5;
+  color: black;
+}
+form {
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+}
+.inputs {
+  display: flex;
+  text-align: center;
+  gap: 5px;
+  background-color: #9ba4b5;
+  border-radius: 5px;
+  padding: 5px;
+}
+.inputs div {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1;
+}
+.submits {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+.submits * {
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #61c7c1;
+}
+
+@media (max-width: 1160px) {
+  .inputs {
+    flex-direction: column;
+  }
+}
+
+@media (hover: hover) {
+  .activos table tbody tr:hover {
+    background-color: rgb(232, 232, 232);
+  }
+  table {
+    cursor: pointer;
+  }
+  .arrow {
+    cursor: pointer;
+  }
+}
+
+.filtrar {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.filtro {
+  display: flex;
+  justify-content: center;
+}
+.DATAInportants {
+  display: flex;
+}
+
+.arrow {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+table * {
+  padding: 5px;
+}
+#mensaje {
+  text-align: center;
+  color: #212a3e;
+}

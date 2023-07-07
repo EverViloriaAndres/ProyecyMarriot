@@ -1,0 +1,118 @@
+.activos {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+
+  outline: solid white 1px;
+}
+h3 {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 3px;
+}
+.activos table {
+  text-align: center;
+  width: inherit;
+}
+.activos table th {
+  background-color: black;
+  color: white;
+  padding: 5px;
+}
+.activos table tbody {
+  background-color: #9ba4b5;
+  color: black;
+}
+form {
+  position: relative;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+}
+form h6 {
+  position: absolute;
+  right: 0;
+  height: 59%;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  text-align: center;
+}
+.rojo {
+  background-color: red;
+  color: white;
+}
+.verde {
+  background-color: yellowgreen;
+}
+.inputs {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(4, 1fr);
+  border-radius: 5px;
+  padding: 5px;
+
+  text-align: center;
+  background-color: #9ba4b5;
+}
+.inputs div {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1;
+}
+.submits {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.submits * {
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+
+  padding: 5px;
+  background-color: #61c7c1;
+}
+
+@media (max-width: 1160px) {
+  .inputs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (hover: hover) {
+  .activos table tbody tr:hover {
+    background-color: rgb(232, 232, 232);
+  }
+  #trSeleccion {
+    cursor: pointer;
+  }
+  .arrow {
+    cursor: pointer;
+  }
+}
+
+.filtro {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+}
+
+.dateImportatnt {
+  font-size: 0.6rem;
+  text-decoration: underline;
+  font-style: oblique;
+}
+
+.arrow {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}

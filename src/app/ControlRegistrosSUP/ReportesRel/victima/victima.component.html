@@ -1,0 +1,119 @@
+<div class="activos">
+  <h3>Historial Victimas</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Cedula</th>
+        <th>Cargo</th>
+
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let victima of registrosMostrados()">
+        <td #nom>{{ victima.nombre }}</td>
+        <td #ap>{{ victima.apellido }}</td>
+        <td #cc>{{ victima.cc }}</td>
+        <td #cargo>{{ victima.cargo }}</td>
+
+        <td
+          (dblclick)="
+            select(victima.nombre, victima.apellido, victima.cc, victima.cargo)
+          "
+          class="select"
+          (click)="vaciarInputs()"
+        >
+          Select
+        </td>
+      </tr>
+    </tbody>
+    <div class="arrow">
+      <h5 (click)="mostrarAnterior()">Anterior</h5>
+      <h5 (click)="mostrarSiguientes()">Siguiente</h5>
+    </div>
+  </table>
+  <form action="">
+    <div class="inputs">
+      <div class="nombre">
+        <label for="nombre">Nombre</label>
+        <input
+          [(ngModel)]="nombre"
+          type="text"
+          name="nombre"
+          id="nombre"
+          placeholder="Nombre"
+        />
+      </div>
+      <div class="apellido">
+        <label for="apellido">Apellido</label>
+        <input
+          [(ngModel)]="apellido"
+          type="text"
+          name="apellido"
+          id="apellido"
+          placeholder="Apellido"
+        />
+      </div>
+      <div class="cc">
+        <label for="cc">Cedula</label>
+        <input
+          [disabled]="disabled"
+          [(ngModel)]="cc"
+          type="number"
+          name="cc"
+          id="cc"
+          placeholder="Cedula"
+        />
+      </div>
+      <div class="cargo">
+        <label for="cargo">Cargo</label>
+        <input
+          [(ngModel)]="cargo"
+          type="text"
+          name="cargo"
+          id="cargo"
+          placeholder="Cargo"
+        />
+      </div>
+      <label for="filtro"></label>
+      <input
+        #filtro
+        type="text"
+        name="filtro"
+        id="filtro #filtro"
+        placeholder="Filtrar"
+        (keydown.enter)="getByFiltro(filtro.value)"
+      />
+    </div>
+  </form>
+  <div class="submits">
+    <input
+      #Update
+      type="submit"
+      value="Editar"
+      name="Editar"
+      id="Editar"
+      (click)="updateActivo()"
+    />
+    <input
+      #Insert
+      type="submit"
+      value="Agregar"
+      name="Agregar"
+      id="Agregar"
+      (click)="insertNuevoActivo()"
+      (dblclick)="preparaGuardar()"
+    />
+    <input
+      #Delete
+      type="submit"
+      value="Eliminar"
+      name="Eliminar"
+      id="Eliminar"
+      (click)="deleteActivo()"
+    />
+  </div>
+  <p>{{ mensajeOk }}</p>
+</div>

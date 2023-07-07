@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  padding: 0;
+  margin: 0;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  width: 100%;
+  padding: 15px 0px;
+
+  background-color: #212a3e;
+  color: white;
+  outline: solid white 2px;
+}
+nav img {
+  width: clamp(150px, 15vw, 280px);
+  height: 132px;
+  border-radius: 3px;
+  outline: solid 2px white;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.body {
+  display: flex;
+
+  background-color: #f1f6f9;
+  width: 100%;
+  overflow-x: auto;
+}
+@media (max-width: 500px) {
+  nav h1 {
+    display: none;
+  }
+}

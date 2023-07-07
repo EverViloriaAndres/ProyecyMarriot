@@ -1,0 +1,141 @@
+<div class="activos">
+  <h3>Objetos Devueltos</h3>
+  <table (click)="vaciarInputs()">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Objeto</th>
+        <th>Devuelto por</th>
+        <th>Devuelto A</th>
+        <th>Observacion</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        (dblclick)="
+          selecionar(
+            registro.id,
+            registro.objetoFK,
+            registro.entrgadoPor_FK,
+            registro.entregadoA,
+            registro.observaciones,
+            registro.fechaSuceso
+          )
+        "
+        *ngFor="let registro of registrosMostrados()"
+      >
+        <td>{{ registro.id }}</td>
+        <td>{{ registro.objetoFK }}</td>
+        <td>{{ registro.entrgadoPor_FK }}</td>
+        <td>{{ registro.entregadoA }}</td>
+        <td>{{ registro.observaciones }}</td>
+        <td>{{ registro.fechaSuceso }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="arrow">
+    <h6 (click)="mostrarAnterior()">Anterios</h6>
+    <h6 (click)="mostrarSiguientes()">Siguiente</h6>
+  </div>
+  <form action="">
+    <div class="inputs">
+      <div class="id_movimiento">
+        <label for="id">ID</label>
+        <input
+          type="number"
+          name="id"
+          id="id"
+          [(ngModel)]="id"
+          disabled="true"
+        />
+      </div>
+      <div class="objeto">
+        <label for="">objeto</label>
+        <select
+          [(ngModel)]="objetoFK"
+          name="listobj"
+          id="listobj"
+          title="guardas"
+        >
+          <option [value]="obj.id" *ngFor="let obj of listOBJ">
+            {{ obj.id }}: {{ obj.nombre }} {{ obj.apellido }}
+          </option>
+        </select>
+      </div>
+      <div class="guarda">
+        <label for="">Entregado Por</label>
+        <select
+          [(ngModel)]="entrgadoPor_FK"
+          name="listGuarda"
+          id="listGuarda"
+          title="guardas"
+        >
+          <option [value]="guarda.cc" *ngFor="let guarda of listaGuardas">
+            {{ guarda.cc }}: {{ guarda.nombre }} {{ guarda.apellido }}
+          </option>
+        </select>
+      </div>
+      <div class="entregadoA">
+        <label for="entregadoA">Entregado A</label>
+        <input
+          type="text"
+          name="entregadoA"
+          id="entregadoA"
+          placeholder="..."
+          [(ngModel)]="entregadoA"
+        />
+      </div>
+
+      <div class="observaciones">
+        <label for="observaciones">Observaciones</label>
+        <input
+          type="text"
+          name="observaciones"
+          id="observaciones"
+          placeholder="..."
+          [(ngModel)]="observaciones"
+        />
+      </div>
+    </div>
+    <div class="fechaSuceso">
+      <div class="fechaSuceso">
+        <label for="fechaSuceso">Fecha Suceso</label>
+        <input
+          #filtroGet
+          type="date"
+          name=" fechaSuceso"
+          id="fechaSuceso"
+          [(ngModel)]="fechaSuceso"
+        />
+      </div>
+    </div>
+    <div class="filtro">
+      <div class="filtrar">
+        <label for="filtrar">Filtrar</label>
+        <input
+          #Criterio
+          [value]="variableCriterio"
+          type="text"
+          name="filtrar"
+          id="filtrar"
+          (keyup.enter)="getByCriterio(Criterio.value)"
+        />
+      </div>
+    </div>
+    <div class="botones">
+      <input
+        type="button"
+        name="editar"
+        value="Editar"
+        (click)="update()"
+      /><input
+        type="button"
+        name="guardar"
+        value="Guardar"
+        (click)="insert()"
+      />
+    </div>
+    <p id="mensaje">{{ mensajeOk }}</p>
+  </form>
+</div>

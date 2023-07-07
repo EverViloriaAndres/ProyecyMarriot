@@ -1,0 +1,211 @@
+<div class="activos">
+  <h3>Investigaciones</h3>
+  <table (dblclick)="vaciarInputs()" id="tabla">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Motivo</th>
+        <th>Solicitante</th>
+        <th>Autorizado</th>
+        <th>Lugar</th>
+        <th>Investigador</th>
+        <th>Inicio</th>
+        <th>Fin</th>
+        <th>Finalizada</th>
+        <th>Aprehensión</th>
+        <th>Observaciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        (click)="
+          select(
+            investigacion.id,
+            investigacion.motivo,
+            investigacion.quienSolicita,
+            investigacion.quienAutoriza_FK,
+            investigacion.lugarFK,
+            investigacion.investigadoPor,
+            investigacion.inicio,
+            investigacion.fin,
+            investigacion.finalizada,
+            investigacion.aprehension,
+            investigacion.observaciones_resultado
+          )
+        "
+        *ngFor="let investigacion of registrosMostrados()"
+      >
+        <td #id>{{ investigacion.id }}</td>
+        <td #nov>{{ investigacion.motivo }}</td>
+        <td #lug>{{ investigacion.quienSolicita }}</td>
+        <td #ac>{{ investigacion.quienAutoriza_FK }}</td>
+        <td #ob>{{ investigacion.lugarFK }}</td>
+        <td #fe>{{ investigacion.investigadoPor }}</td>
+        <td #inicio>{{ investigacion.inicio }}</td>
+        <td #fin>{{ investigacion.fin }}</td>
+        <td #finalizada>{{ investigacion.finalizada }}</td>
+        <td #aprehension>{{ investigacion.aprehension }}</td>
+        <td #observaciones>{{ investigacion.observaciones_resultado }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!---->
+  <div class="arrow">
+    <h6 (click)="mostrarAnterior()">Anterior</h6>
+    <h6 (click)="mostrarSiguientes()">Siguiente</h6>
+  </div>
+  <!---->
+  <form action="">
+    <div class="inputs">
+      <!---->
+
+      <div>
+        <label for="idInvestigacion">ID de Investigación</label>
+        <input
+          disabled="true"
+          name="idInvestigacion"
+          type="number"
+          id="idInvestigacion"
+          [(ngModel)]="idInvestigacion"
+        />
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="motivo">Motivo</label>
+        <input name="motivo" type="text" id="motivo" [(ngModel)]="motivo" />
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="quienSolicita">Quién solicita</label>
+        <input
+          name="quienSolicita"
+          type="text"
+          id="quienSolicita"
+          [(ngModel)]="quienSolicita"
+        />
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="quienAutoriza_FK">Quién autoriza</label>
+        <select
+          name="quienAutoriza_FK"
+          id="quienAutoriza_FK"
+          [(ngModel)]="quienAutoriza_FK"
+        >
+          <option value="vacio"></option>
+          <option [value]="gerente.cc" *ngFor="let gerente of gerentes">
+            {{ gerente.cc }}: {{ gerente.apellido }} {{ gerente.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="lugarFK">Lugar</label>
+        <select name="lugarFK" id="lugarFK" [(ngModel)]="lugarFK">
+          <option value="vacio"></option>
+          <option [value]="lugar.id" *ngFor="let lugar of lugares">
+            {{ lugar.id }}:{{ lugar.tipoLugar }}{{ lugar.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="investigadoPor">Investigado por</label>
+        <input
+          name="investigadoPor"
+          type="text"
+          id="investigadoPor"
+          [(ngModel)]="investigadoPor"
+        />
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="inicio">Fecha de inicio</label>
+        <input name="inicio" type="date" id="inicio" [(ngModel)]="inicio" />
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="fin">Fecha de fin</label>
+        <input name="fin" type="date" id="fin" [(ngModel)]="fin" />
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="finalizada">Finalizada?</label>
+        <select
+          title="finalizada"
+          name="finalizada"
+          id="finalizadal"
+          [(ngModel)]="finalizada"
+        >
+          <option value="NO">No</option>
+          <option value="SI">Si</option>
+        </select>
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="aprehension">Aprehension?</label>
+        <select
+          title="aprehension"
+          name="aprehension"
+          id="aprehension"
+          [(ngModel)]="aprehension"
+        >
+          <option value="NO">No</option>
+          <option value="SI">Si</option>
+        </select>
+      </div>
+
+      <!---->
+
+      <div>
+        <label for="observaciones_resultado">Observaciones</label>
+        <input
+          name="observaciones_resultado"
+          type="text"
+          id="observaciones_resultado"
+          [(ngModel)]="observaciones_resultado"
+        />
+      </div>
+      <!---->
+    </div>
+  </form>
+  <div class="submits">
+    <input
+      #Update
+      type="submit"
+      value="Editar"
+      name="Editar"
+      id="Editar"
+      (click)="update()"
+    />
+    <input
+      #Insert
+      type="submit"
+      value="Agregar"
+      name="Agregar"
+      id="Agregar"
+      (click)="insert()"
+    />
+  </div>
+
+  <p>{{ mensajeOk }}</p>
+</div>
